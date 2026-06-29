@@ -154,6 +154,8 @@ def episode_to_metadata(
     episode: Episode,
     settings: Settings,
     identifier: str,
+    *,
+    season_name: str | None = None,
 ) -> Metadata:
     number = episode.number or 0
     rating_key = keys.episode_key(show.id, season_number, number)
@@ -181,7 +183,7 @@ def episode_to_metadata(
         parent_key=keys.metadata_key(season_rk),
         parent_guid=keys.build_guid(identifier, "season", season_rk),
         parent_type="season",
-        parent_title=f"Сезон {season_number}",
+        parent_title=season_name or f"Сезон {season_number}",
         parent_index=season_number,
         grandparent_rating_key=show_rk,
         grandparent_key=keys.metadata_key(show_rk),

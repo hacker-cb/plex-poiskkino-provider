@@ -94,7 +94,10 @@ class PoiskKinoClient:
                 f"PoiskKino returned HTTP {response.status_code} for {path}",
                 status_code=response.status_code,
             )
-        return response.json()
+        try:
+            return response.json()
+        except ValueError as exc:  # 2xx with empty/non-JSON body
+            raise PoiskKinoError(f"PoiskKino returned a non-JSON body for {path}") from exc
 
     async def get_movie(self, kp_id: int) -> Movie:
         """Fetch a single movie/series by its Kinopoisk id (full object)."""
@@ -133,8 +136,12 @@ class PoiskKinoClient:
         envelope = SeasonSearchResponse.model_validate(data)
         return envelope.docs[0] if envelope.docs else None
 
-    async def get_seasons(self, movie_id: int, *, limit: int = 50) -> list[Season]:
-        """Fetch all seasons (with episodes) of a series, sorted by number."""
+    async def get_seasons(self, movie_id: int, *, limit: int = 250) -> list[Season]:
+        """Fetch all seasons (with episodes) of a series, sorted by number.
+
+        ``limit=250`` is the API maximum and far exceeds any real season count,
+        so a single page is sufficient in practice.
+        """
         data = await self._get(
             "/v1.4/season",
             params={"movieId": movie_id, "limit": limit, "page": 1},

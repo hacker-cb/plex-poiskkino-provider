@@ -21,6 +21,8 @@ Wants=network-online.target
 Type=simple
 User=poiskkino
 Group=poiskkino
+# Bind localhost only — the provider API is unauthenticated (env file may override).
+Environment=POISKKINO_HOST=127.0.0.1
 EnvironmentFile=/etc/poiskkino-provider.env
 ExecStart=/opt/poiskkino-provider/.venv/bin/poiskkino-provider
 Restart=on-failure

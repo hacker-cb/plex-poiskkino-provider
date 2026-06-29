@@ -8,6 +8,7 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
+from pydantic import ValidationError
 
 from . import __version__
 from .config import Settings
@@ -65,6 +66,15 @@ def create_app(
         return JSONResponse(
             status_code=502,
             content={"error": "poiskkino_error", "message": str(exc)},
+        )
+
+    @app.exception_handler(ValidationError)
+    async def _upstream_schema_error(_request: Request, exc: ValidationError) -> JSONResponse:
+        # An upstream PoiskKino response that no longer matches our models.
+        logger.error("PoiskKino response failed validation: %s", exc)
+        return JSONResponse(
+            status_code=502,
+            content={"error": "poiskkino_schema_error", "message": "unexpected upstream response"},
         )
 
     app.include_router(make_provider_router(MediaKind.movie, service))

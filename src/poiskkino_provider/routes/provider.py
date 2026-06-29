@@ -18,9 +18,13 @@ def _resolve_paging(
     start_query: int | None,
     size_query: int | None,
 ) -> tuple[int, int]:
-    start = start_header or start_query or 1
-    size = size_header or size_query or _DEFAULT_PAGE_SIZE
-    return max(start, 1), max(size, 1)
+    # Header takes precedence over query; use ``is not None`` so an explicit 0
+    # is honoured (start is 1-based; size 0 is a valid count-only probe).
+    start = start_header if start_header is not None else start_query
+    size = size_header if size_header is not None else size_query
+    start = 1 if start is None else max(start, 1)
+    size = _DEFAULT_PAGE_SIZE if size is None else max(size, 0)
+    return start, size
 
 
 def make_provider_router(kind: MediaKind, service: ProviderService) -> APIRouter:

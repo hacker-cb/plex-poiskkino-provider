@@ -44,7 +44,10 @@ class Settings(BaseSettings):
     api_base: str = "https://api.poiskkino.dev"
 
     # --- HTTP server ---
-    host: str = "0.0.0.0"
+    # Safe default: bind localhost only (the provider API has no auth). The
+    # Docker image overrides this to 0.0.0.0 via ENV, and its published port is
+    # bound to 127.0.0.1 on the host so the service still isn't world-reachable.
+    host: str = "127.0.0.1"
     port: int = 8000
 
     # --- Provider identity ---

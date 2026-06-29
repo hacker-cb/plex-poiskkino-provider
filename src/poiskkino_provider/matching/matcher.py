@@ -40,7 +40,9 @@ def parse_external_guid(guid: str | None) -> tuple[str, str] | None:
     match = _GUID_RE.match(guid.strip())
     if not match:
         return None
-    return match.group(1).lower(), match.group(2)
+    # Plex GUIDs may carry a query/fragment suffix, e.g. ``imdb://tt0232500?lang=en``.
+    value = match.group(2).split("?", 1)[0].split("#", 1)[0]
+    return match.group(1).lower(), value
 
 
 def _normalize(value: str | None) -> str:
@@ -87,13 +89,16 @@ class Matcher:
     async def match_candidates(self, hints: MatchHints, *, limit: int) -> list[Movie]:
         """Return up to ``limit`` candidates, best first (for manual search)."""
         # Tier 1/2: external ids are authoritative — trust them, skip scoring.
+        # Still require the media type to be compatible, so a stray imdb/tmdb id
+        # pointing at the wrong kind (e.g. a movie for a show request) falls
+        # through to the text search instead of producing a broken match.
         if hints.imdb_id:
             movie = await self._client.find_by_imdb(hints.imdb_id)
-            if movie is not None:
+            if movie is not None and _type_compatible(hints.media_type, movie.type):
                 return [movie]
         if hints.tmdb_id:
             movie = await self._client.find_by_tmdb(hints.tmdb_id)
-            if movie is not None:
+            if movie is not None and _type_compatible(hints.media_type, movie.type):
                 return [movie]
 
         # Tier 3: text search with disambiguation.
@@ -103,7 +108,7 @@ class Matcher:
         return self._rank(hints, candidates)[:limit]
 
     def _rank(self, hints: MatchHints, candidates: list[Movie]) -> list[Movie]:
-        scored: list[tuple[float, int, Movie]] = []
+        scored: list[tuple[float, int, int, Movie]] = []
         for movie in candidates:
             if not _type_compatible(hints.media_type, movie.type):
                 continue
@@ -112,7 +117,8 @@ class Matcher:
                 continue
             if hints.year and movie.year and abs(hints.year - movie.year) > 1:
                 continue  # wrong year — almost certainly a different title
-            scored.append((similarity, movie.kp_votes or 0, movie))
-        # Best title match first; break ties by popularity (vote count).
-        scored.sort(key=lambda item: (item[0], item[1]), reverse=True)
-        return [movie for _, _, movie in scored]
+            year_delta = abs(hints.year - movie.year) if hints.year and movie.year else 1
+            scored.append((similarity, -year_delta, movie.kp_votes or 0, movie))
+        # Best title match first; then closest year; then popularity (vote count).
+        scored.sort(key=lambda item: item[:3], reverse=True)
+        return [item[3] for item in scored]

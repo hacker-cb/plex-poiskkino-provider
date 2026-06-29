@@ -199,15 +199,26 @@ class ProviderService:
             for episode in season.episodes:
                 if episode.number == index:
                     return mapping.episode_to_metadata(
-                        show, parent_index, episode, self._settings, identifier
+                        show,
+                        parent_index,
+                        episode,
+                        self._settings,
+                        identifier,
+                        season_name=season.name,
                     )
             return None
         if date is not None:
+            target = date[:10]
             for season in await self._seasons(show.id):
                 for episode in season.episodes:
-                    if episode.air_date and episode.air_date[:10] == date:
+                    if episode.air_date and episode.air_date[:10] == target:
                         return mapping.episode_to_metadata(
-                            show, season.number or 0, episode, self._settings, identifier
+                            show,
+                            season.number or 0,
+                            episode,
+                            self._settings,
+                            identifier,
+                            season_name=season.name,
                         )
         return None
 
@@ -269,7 +280,9 @@ class ProviderService:
         season_md = mapping.season_to_metadata(movie, season, self._settings, identifier)
         if include_children:
             episodes = [
-                mapping.episode_to_metadata(movie, parsed.season, ep, self._settings, identifier)
+                mapping.episode_to_metadata(
+                    movie, parsed.season, ep, self._settings, identifier, season_name=season.name
+                )
                 for ep in season.episodes
             ]
             season_md.children = Children(size=len(episodes), metadata=episodes)
@@ -285,7 +298,12 @@ class ProviderService:
         for episode in season.episodes:
             if episode.number == parsed.episode:
                 return mapping.episode_to_metadata(
-                    movie, parsed.season, episode, self._settings, identifier
+                    movie,
+                    parsed.season,
+                    episode,
+                    self._settings,
+                    identifier,
+                    season_name=season.name,
                 )
         return None
 
@@ -314,7 +332,9 @@ class ProviderService:
             if movie is None or season is None:
                 return None
             items = [
-                mapping.episode_to_metadata(movie, parsed.season, ep, self._settings, identifier)
+                mapping.episode_to_metadata(
+                    movie, parsed.season, ep, self._settings, identifier, season_name=season.name
+                )
                 for ep in season.episodes
             ]
             return self._paged(identifier, items, start, size)
@@ -335,7 +355,12 @@ class ProviderService:
             for episode in season.episodes:
                 items.append(
                     mapping.episode_to_metadata(
-                        movie, season.number or 0, episode, self._settings, identifier
+                        movie,
+                        season.number or 0,
+                        episode,
+                        self._settings,
+                        identifier,
+                        season_name=season.name,
                     )
                 )
         return self._paged(identifier, items, start, size)
