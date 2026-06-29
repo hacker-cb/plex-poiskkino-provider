@@ -1,0 +1,72 @@
+{
+  "id": 404900,
+  "name": "Во все тяжкие",
+  "alternativeName": "Breaking Bad",
+  "enName": null,
+  "type": "tv-series",
+  "typeNumber": 2,
+  "year": 2008,
+  "isSeries": true,
+  "rating": {
+    "kp": 8.929,
+    "imdb": 9.5,
+    "russianFilmCritics": 100
+  },
+  "votes": {
+    "kp": 820583,
+    "imdb": 2600000,
+    "russianFilmCritics": 9
+  },
+  "externalId": {
+    "kpHD": "49c681d107948f2ebdf7dd6b46f6ebca",
+    "imdb": "tt0903747"
+  },
+  "poster": {
+    "url": "https://avatars.mds.yandex.net/get-kinopoisk-image/1900788/fb35416f-3b0d-4b96-bc65-cf6923f9e329/600x900",
+    "previewUrl": "https://avatars.mds.yandex.net/get-kinopoisk-image/1900788/fb35416f-3b0d-4b96-bc65-cf6923f9e329/300x450"
+  },
+  "backdrop": {
+    "url": "https://avatars.mds.yandex.net/get-ott/212840/2a0000017802c1ad72babf5fca7bb369de8e/1344x756",
+    "previewUrl": "https://avatars.mds.yandex.net/get-ott/212840/2a0000017802c1ad72babf5fca7bb369de8e/678x380"
+  },
+  "description": "Школьный учитель химии Уолтер Уайт узнаёт, что болен раком лёгких. Учитывая сложное финансовое состояние дел семьи, а также перспективы, Уолтер решает заняться изготовлением метамфетамина. Для этого он привлекает своего бывшего ученика Джесси Пинкмана, когда-то исключённого из школы при активном содействии Уайта. Пинкман сам занимался варкой мета, но накануне, в ходе рейда УБН, он лишился подельника и лаборатории.",
+  "shortDescription": "Умирающий учитель химии начинает варить мет ради благополучия семьи. Выдающийся драматический сериал 2010-х",
+  "slogan": "Запомните моё имя",
+  "ageRating": 18,
+  "ratingMpaa": null,
+  "movieLength": null,
+  "seriesLength": 47,
+  "genres": [
+    {
+      "name": "криминал"
+    },
+    {
+      "name": "драма"
+    },
+    {
+      "name": "триллер"
+    }
+  ],
+  "countries": [
+    {
+      "name": "США"
+    }
+  ],
+  "names": [
+    {
+      "name": "Во все тяжкие",
+      "language": "RU",
+      "type": "Russian title on kinopoisk"
+    },
+    {
+      "name": "Breaking Bad",
+      "language": null,
+      "type": "Original title on kinopoisk"
+    }
+  ],
+  "premiere": {
+    "world": "2008-01-20T00:00:00.000Z",
+    "russia": "2011-03-17T00:00:00.000Z",
+    "digital": "2008-01-20T00:00:00.000Z"
+  }
+}

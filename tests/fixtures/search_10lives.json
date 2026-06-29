@@ -1,0 +1,301 @@
+{
+  "docs": [
+    {
+      "id": 1140005,
+      "name": "10 жизней",
+      "alternativeName": "10 Lives",
+      "enName": "",
+      "type": "cartoon",
+      "typeNumber": 3,
+      "year": 2024,
+      "isSeries": false,
+      "rating": {
+        "kp": 7.878,
+        "imdb": 6
+      },
+      "votes": {
+        "kp": 273522,
+        "imdb": 2500,
+        "russianFilmCritics": 1
+      },
+      "externalId": {
+        "kpHD": "3edf1deedc5e4839964145a5286741ad"
+      },
+      "poster": {
+        "url": "https://avatars.mds.yandex.net/get-kinopoisk-image/10835644/ad885812-c265-47b8-9c5b-fb84914f7b44/600x900",
+        "previewUrl": "https://avatars.mds.yandex.net/get-kinopoisk-image/10835644/ad885812-c265-47b8-9c5b-fb84914f7b44/300x450"
+      },
+      "backdrop": {
+        "url": "https://avatars.mds.yandex.net/get-ott/12808873/2a000001940c7339c6330eaa91e6a6fc1b5f/1344x756",
+        "previewUrl": "https://avatars.mds.yandex.net/get-ott/12808873/2a000001940c7339c6330eaa91e6a6fc1b5f/678x380"
+      },
+      "description": "Все прекрасно знают, что у котов девять жизней. А еще говорят, что коты ленивые, капризные и довольно агрессивны к окружающим. И все-таки даже самые заносчивые из них просто душки по сравнению с пушистой бестией по имени Беккет. Но его будни скоро изменятся. Притом, целых десять раз! Коту предстоит побывать в шкуре совершенно разных животных, чтобы, наконец, начать ценить свою собственную жизнь.",
+      "shortDescription": "Кот получает шанс вернуться к хозяйке, но в облике других животных. Веселые и трогательные приключения",
+      "slogan": null,
+      "ageRating": 6,
+      "ratingMpaa": null,
+      "movieLength": 88,
+      "seriesLength": null,
+      "genres": [
+        {
+          "name": "мультфильм"
+        },
+        {
+          "name": "фэнтези"
+        },
+        {
+          "name": "комедия"
+        },
+        {
+          "name": "семейный"
+        }
+      ],
+      "countries": [
+        {
+          "name": "Великобритания"
+        },
+        {
+          "name": "Канада"
+        },
+        {
+          "name": "Франция"
+        },
+        {
+          "name": "Китай"
+        },
+        {
+          "name": "США"
+        }
+      ],
+      "names": [
+        {
+          "name": "10 жизней",
+          "language": "RU",
+          "type": "Russian title on kinopoisk"
+        },
+        {
+          "name": "10 Lives",
+          "language": null,
+          "type": "Original title on kinopoisk"
+        }
+      ],
+      "premiere": null
+    },
+    {
+      "id": 412512,
+      "name": "Пересечение 106-й и Парк: Топ-10",
+      "alternativeName": "106 & Park Top 10 Live",
+      "enName": "",
+      "type": "tv-series",
+      "typeNumber": 2,
+      "year": 2000,
+      "isSeries": true,
+      "rating": {
+        "imdb": 5.2
+      },
+      "votes": {
+        "kp": 85,
+        "imdb": 319
+      },
+      "externalId": null,
+      "poster": null,
+      "backdrop": null,
+      "description": "",
+      "shortDescription": "",
+      "slogan": null,
+      "ageRating": null,
+      "ratingMpaa": null,
+      "movieLength": 0,
+      "seriesLength": 90,
+      "genres": [
+        {
+          "name": "музыка"
+        }
+      ],
+      "countries": [
+        {
+          "name": "США"
+        }
+      ],
+      "names": [
+        {
+          "name": "Пересечение 106-й и Парк: Топ-10",
+          "language": "RU",
+          "type": "Russian title on kinopoisk"
+        },
+        {
+          "name": "106 & Park Top 10 Live",
+          "language": null,
+          "type": "Original title on kinopoisk"
+        }
+      ],
+      "premiere": null
+    },
+    {
+      "id": 592206,
+      "name": "10 O'Clock Live",
+      "alternativeName": "10 O'Clock Live",
+      "enName": "",
+      "type": "tv-series",
+      "typeNumber": 2,
+      "year": 2011,
+      "isSeries": true,
+      "rating": {
+        "imdb": 7.2
+      },
+      "votes": {
+        "kp": 37,
+        "imdb": 708
+      },
+      "externalId": {
+        "imdb": "tt1811399",
+        "tmdb": 35393
+      },
+      "poster": {
+        "url": "https://avatars.mds.yandex.net/get-kinopoisk-image/1773646/7b28cc2d-90ef-4966-8590-9847a141a429/600x900",
+        "previewUrl": "https://avatars.mds.yandex.net/get-kinopoisk-image/1773646/7b28cc2d-90ef-4966-8590-9847a141a429/300x450"
+      },
+      "backdrop": null,
+      "description": "",
+      "shortDescription": "",
+      "slogan": null,
+      "ageRating": null,
+      "ratingMpaa": null,
+      "movieLength": 0,
+      "seriesLength": null,
+      "genres": [
+        {
+          "name": "новости"
+        },
+        {
+          "name": "комедия"
+        }
+      ],
+      "countries": [
+        {
+          "name": "Великобритания"
+        }
+      ],
+      "names": [
+        {
+          "name": "10 O'Clock Live",
+          "language": null,
+          "type": "Original title on kinopoisk"
+        }
+      ],
+      "premiere": null
+    },
+    {
+      "id": 355249,
+      "name": "",
+      "alternativeName": "MTV Presents: Live from the 10 Spot with Green Day",
+      "enName": "",
+      "type": "movie",
+      "typeNumber": 1,
+      "year": 1999,
+      "isSeries": false,
+      "rating": {
+        "kp": 0,
+        "imdb": 8.3,
+        "filmCritics": 0,
+        "russianFilmCritics": 0,
+        "await": 0
+      },
+      "votes": {
+        "kp": 9,
+        "imdb": 21,
+        "filmCritics": 0,
+        "russianFilmCritics": 0,
+        "await": 0
+      },
+      "externalId": {
+        "imdb": "tt0397522"
+      },
+      "poster": null,
+      "backdrop": null,
+      "description": "",
+      "shortDescription": "",
+      "slogan": null,
+      "ageRating": null,
+      "ratingMpaa": null,
+      "movieLength": 0,
+      "seriesLength": null,
+      "genres": [
+        {
+          "name": "документальный"
+        },
+        {
+          "name": "музыка"
+        }
+      ],
+      "countries": [
+        {
+          "name": "США"
+        }
+      ],
+      "names": [
+        {
+          "name": "MTV Presents: Live from the 10 Spot with Green Day",
+          "language": null,
+          "type": "Original title on kinopoisk"
+        }
+      ],
+      "premiere": null
+    },
+    {
+      "id": 1317210,
+      "name": "",
+      "alternativeName": "10 Minutes to Live",
+      "enName": "",
+      "type": "movie",
+      "typeNumber": 1,
+      "year": 2019,
+      "isSeries": false,
+      "rating": {
+        "imdb": 8.6
+      },
+      "votes": {
+        "kp": 1,
+        "imdb": 10
+      },
+      "externalId": {
+        "imdb": "tt11079964",
+        "tmdb": 655947
+      },
+      "poster": null,
+      "backdrop": null,
+      "description": "",
+      "shortDescription": "",
+      "slogan": null,
+      "ageRating": null,
+      "ratingMpaa": null,
+      "movieLength": 11,
+      "seriesLength": null,
+      "genres": [
+        {
+          "name": "короткометражка"
+        },
+        {
+          "name": "драма"
+        }
+      ],
+      "countries": [
+        {
+          "name": "США"
+        }
+      ],
+      "names": [
+        {
+          "name": "10 Minutes to Live",
+          "language": null,
+          "type": "Original title on kinopoisk"
+        }
+      ],
+      "premiere": null
+    }
+  ],
+  "total": 1000,
+  "limit": 5,
+  "page": 1,
+  "pages": 200
+}
