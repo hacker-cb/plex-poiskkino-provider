@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/hacker-cb/plex-poiskkino-provider/compare/v0.2.1...v0.3.0) (2026-06-30)
+
+
+### Features
+
+* show Kinopoisk rating via custom kinopoisk:// image ([#10](https://github.com/hacker-cb/plex-poiskkino-provider/issues/10)) ([bb369d3](https://github.com/hacker-cb/plex-poiskkino-provider/commit/bb369d34c03fa7fbc1041a1b80dc58f8f36f4d8a))
+
 ## [0.2.1](https://github.com/hacker-cb/plex-poiskkino-provider/compare/v0.2.0...v0.2.1) (2026-06-30)
 
 

@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "poiskkino-provider"
-version = "0.2.1"
+version = "0.3.0"
 description = "Plex Custom Metadata Provider that adds Kinopoisk (Кинопоиск) ratings, posters and descriptions via the PoiskKino API"
 readme = "README.md"
 license = "MIT"
