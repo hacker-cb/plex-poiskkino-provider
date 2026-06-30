@@ -16,7 +16,9 @@ next version:
 | `feat!:` / `fix!:` / `BREAKING CHANGE:` footer | `feat!: drop /tv endpoint` | major (`0.1.0 → 1.0.0`) |
 | `chore:`, `docs:`, `refactor:`, `test:`, `ci:`, `perf:` | — | no release on their own |
 
-(Pre-1.0, `feat` bumps the **minor** — `bump-minor-pre-major` is enabled.)
+This is plain SemVer (Release Please runs with default bump behavior). The first
+release is computed from the `0.0.0` baseline: the initial `feat:` yields
+`0.1.0`.
 
 ## The flow
 
@@ -37,9 +39,9 @@ You never tag or edit the version by hand.
 | Tag | Tracks | Published by |
 |-----|--------|--------------|
 | `latest` | the newest release | Release Please workflow |
-| `X.Y.Z`, `X.Y`, `X` | a specific release (e.g. `1.2.3`, `1.2`, `1`) | Release Please workflow |
+| `X.Y.Z`, `X.Y` | a specific release (e.g. `1.2.3`, `1.2`) | Release Please workflow |
 | `edge` | the tip of `master` (unreleased) | Docker (edge) workflow |
-| `sha-<commit>` | an exact commit | both workflows |
+| `sha-<commit>` | an exact commit (release commits included) | Docker (edge) workflow |
 
 Pin to `X.Y` for automatic patch updates, or `X.Y.Z` for immutability. Use
 `edge` only to test unreleased `master`.
