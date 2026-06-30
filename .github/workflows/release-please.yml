@@ -50,6 +50,7 @@ jobs:
             type=raw,value=${{ steps.release.outputs.version }}
             type=raw,value=${{ steps.release.outputs.major }}.${{ steps.release.outputs.minor }}
             type=raw,value=${{ steps.release.outputs.major }}
+            type=sha
       - if: ${{ steps.release.outputs.release_created }}
         uses: docker/build-push-action@v7
         with:
