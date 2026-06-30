@@ -95,4 +95,3 @@ Data source & tooling:
 - kinopoisk.dev — https://kinopoisk.dev (upstream API this mirrors)
 - Kometa — https://kometa.wiki (poster-overlay route for a real Kinopoisk logo)
 - release-please — https://github.com/googleapis/release-please
-```
