@@ -16,7 +16,7 @@ the Kinopoisk data.
 
 ## What it contributes
 
-- ⭐ **Kinopoisk rating** (always) — shown as the number next to a generic star.
+- ⭐ **Kinopoisk rating** (always) — shown as the score next to a TMDb badge by default.
 - 🖼️ **Russian poster** (optional) — the Kinopoisk cover.
 - 📝 **Russian description** (optional) — the Kinopoisk synopsis + tagline.
 - 🎬 Background art, and (optionally) genres.
@@ -25,17 +25,25 @@ the Kinopoisk data.
 
 ### ⚠️ Honest limitation: there is no "Kinopoisk" rating *icon*
 
-Plex's branded rating icons are a closed set (`imdb`, `themoviedb`,
-`rottentomatoes`, `thetvdb`) — a true Kinopoisk **logo** can't be added via the
-rating field (only a Kometa‑style poster overlay could, which is out of scope).
+Plex's branded rating icons are a closed set (this provider exposes `imdb`,
+`themoviedb`, `rottentomatoes_ripe`, `rottentomatoes_upright`) — a true Kinopoisk
+**logo** can't be added via the rating field (only a Kometa‑style poster overlay
+could, which is out of scope).
 
-The **number does show**, though. By default (`POISKKINO_RATING_IMAGE=kinopoisk`)
-the provider sends a custom `kinopoisk://image.rating` as a **critic** rating;
-Plex stores it verbatim and the web client renders the score next to a generic
-star — honest, and it doesn't masquerade as IMDb/TMDb. (Verified on the web
-client; some mobile/TV apps may render number‑only — if a client shows nothing,
-switch `POISKKINO_RATING_IMAGE` to `imdb`/`themoviedb` to ride a guaranteed icon
-at the cost of a mislabeled source.)
+Worse, Plex clients **only render a rating that rides one of those branded
+badges**. A custom `kinopoisk://image.rating` is stored but shows up as
+**nothing** on every client tested (web + iOS) — so it's data‑only. To make the
+number visible you ride a recognized icon: it mislabels the source, but the
+score shows. The default is **`themoviedb`** — Russian titles almost never carry
+a real TMDb critic score, so the Kinopoisk value rarely collides with one (and
+it sits in the `critic` slot, beside the film's existing audience rating rather
+than fighting it). Switch `POISKKINO_RATING_IMAGE` to `imdb` or
+`rottentomatoes_ripe` if you prefer a different badge; keep `kinopoisk` only if
+you want the score in Plex's data (sort/search) without a visible badge.
+
+> **Changing the badge later?** Plex won't overwrite an already‑stored rating on
+> a plain *Refresh Metadata* — use **Fix Match** (re‑match) on existing items.
+> New items pick up the configured badge on first match.
 
 ## Matching
 
@@ -83,8 +91,8 @@ All options are environment variables prefixed `POISKKINO_` (see
 | Variable | Default | Description |
 |----------|---------|-------------|
 | `POISKKINO_API_TOKEN` | — | **Required.** Token from [@poiskkinodev_bot](https://t.me/poiskkinodev_bot). |
-| `POISKKINO_RATING_IMAGE` | `kinopoisk` | How the KP score shows: `kinopoisk` (number + generic star, honest) or ride a branded icon (`imdb`/`themoviedb`/`rottentomatoes_ripe`/`rottentomatoes_upright`). |
-| `POISKKINO_RATING_TYPE` | `critic` | Rating slot (`critic`/`audience`). `critic` is needed for the `kinopoisk` number to render. |
+| `POISKKINO_RATING_IMAGE` | `themoviedb` | Badge the KP score rides: `themoviedb`/`imdb`/`rottentomatoes_ripe`/`rottentomatoes_upright` (visible, mislabels source) or `kinopoisk` (data‑only, renders nothing). |
+| `POISKKINO_RATING_TYPE` | `critic` | Rating slot (`critic`/`audience`). `critic` sits beside the film's audience rating; `audience` competes with Plex's IMDb cloud rating. |
 | `POISKKINO_WRITE_POSTER` | `true` | Contribute the Kinopoisk poster. |
 | `POISKKINO_WRITE_SUMMARY` | `true` | Contribute the Russian description + tagline. |
 | `POISKKINO_WRITE_ART` | `true` | Contribute background art. |

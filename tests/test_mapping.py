@@ -30,8 +30,9 @@ def test_movie_mapping_full() -> None:
     assert md.year == 2001
     assert md.summary
     assert md.thumb and md.thumb.startswith("https://")
-    # Default: custom kinopoisk image as a critic rating (honest number, no fake icon).
-    assert md.ratings and md.ratings[0].image == "kinopoisk://image.rating"
+    # Default: TMDb badge as a critic rating — the score is visible (a custom
+    # kinopoisk:// image renders as nothing on Plex clients).
+    assert md.ratings and md.ratings[0].image == "themoviedb://image.rating"
     assert md.ratings[0].value == 7.827
     assert md.ratings[0].type == "critic"
     ids = {g.id for g in md.guids or []}
@@ -40,13 +41,14 @@ def test_movie_mapping_full() -> None:
 
 
 def test_rating_image_configurable() -> None:
-    settings = _settings(rating_image=RatingImage.themoviedb)
+    # The data-only kinopoisk scheme is still selectable (e.g. for sort/search).
+    settings = _settings(rating_image=RatingImage.kinopoisk)
     md = mapping.movie_to_metadata(_forsazh(), settings, IDENT)
-    assert md.ratings and md.ratings[0].image == "themoviedb://image.rating"
+    assert md.ratings and md.ratings[0].image == "kinopoisk://image.rating"
 
 
 def test_rating_type_configurable() -> None:
-    # Riding a known badge as an audience rating (alternative to the kinopoisk default).
+    # The audience slot competes with Plex's IMDb cloud rating (alternative use).
     settings = _settings(rating_image=RatingImage.imdb, rating_type=RatingType.audience)
     md = mapping.movie_to_metadata(_forsazh(), settings, IDENT)
     assert md.ratings and md.ratings[0].image == "imdb://image.rating"
