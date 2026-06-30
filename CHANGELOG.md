@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.1](https://github.com/hacker-cb/plex-poiskkino-provider/compare/v0.3.0...v0.3.1) (2026-06-30)
+
+
+### Bug Fixes
+
+* **rating:** default to a visible TMDb badge instead of invisible kinopoisk ([#12](https://github.com/hacker-cb/plex-poiskkino-provider/issues/12)) ([cffd11e](https://github.com/hacker-cb/plex-poiskkino-provider/commit/cffd11e40f357537138341de24c40fd9bd00306d))
+
 ## [0.3.0](https://github.com/hacker-cb/plex-poiskkino-provider/compare/v0.2.1...v0.3.0) (2026-06-30)
 
 
