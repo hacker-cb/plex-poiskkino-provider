@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from poiskkino_provider.config import RatingImage, Settings
+from poiskkino_provider.config import RatingImage, RatingType, Settings
 from poiskkino_provider.plex import mapping
 from poiskkino_provider.poiskkino.models import Movie, SeasonSearchResponse
 
@@ -30,9 +30,10 @@ def test_movie_mapping_full() -> None:
     assert md.year == 2001
     assert md.summary
     assert md.thumb and md.thumb.startswith("https://")
-    assert md.ratings and md.ratings[0].image == "imdb://image.rating"
+    # Default: custom kinopoisk image as a critic rating (honest number, no fake icon).
+    assert md.ratings and md.ratings[0].image == "kinopoisk://image.rating"
     assert md.ratings[0].value == 7.827
-    assert md.ratings[0].type == "audience"
+    assert md.ratings[0].type == "critic"
     ids = {g.id for g in md.guids or []}
     assert ids == {"imdb://tt0232500", "tmdb://9799"}
     assert md.originally_available_at and len(md.originally_available_at) == 10
@@ -42,6 +43,14 @@ def test_rating_image_configurable() -> None:
     settings = _settings(rating_image=RatingImage.themoviedb)
     md = mapping.movie_to_metadata(_forsazh(), settings, IDENT)
     assert md.ratings and md.ratings[0].image == "themoviedb://image.rating"
+
+
+def test_rating_type_configurable() -> None:
+    # Riding a known badge as an audience rating (alternative to the kinopoisk default).
+    settings = _settings(rating_image=RatingImage.imdb, rating_type=RatingType.audience)
+    md = mapping.movie_to_metadata(_forsazh(), settings, IDENT)
+    assert md.ratings and md.ratings[0].image == "imdb://image.rating"
+    assert md.ratings[0].type == "audience"
 
 
 def test_flags_disable_optional_fields() -> None:

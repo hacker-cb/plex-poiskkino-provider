@@ -16,20 +16,26 @@ the Kinopoisk data.
 
 ## What it contributes
 
-- ⭐ **Kinopoisk rating** (always) — as an `audience` rating.
+- ⭐ **Kinopoisk rating** (always) — shown as the number next to a generic star.
 - 🖼️ **Russian poster** (optional) — the Kinopoisk cover.
 - 📝 **Russian description** (optional) — the Kinopoisk synopsis + tagline.
 - 🎬 Background art, and (optionally) genres.
 - 📺 TV: show‑level rating/poster/summary plus Russian season/episode titles,
   descriptions and stills (Kinopoisk has no per‑episode ratings).
 
-### ⚠️ Honest limitation: there is no "Kinopoisk" rating icon
+### ⚠️ Honest limitation: there is no "Kinopoisk" rating *icon*
 
-Plex's rating badge set is **fixed** (`imdb`, `themoviedb`, `rottentomatoes`) and
-[custom badges are not supported](https://github.com/plexinc/tmdb-example-provider/blob/main/docs/Metadata.md#rating-image-identifiers).
-The Kinopoisk **number** will display, but under one of those existing icons
-(configurable via `POISKKINO_RATING_IMAGE`, default `imdb`). A true Kinopoisk logo
-would require a Kometa‑style poster overlay, which is out of scope here.
+Plex's branded rating icons are a closed set (`imdb`, `themoviedb`,
+`rottentomatoes`, `thetvdb`) — a true Kinopoisk **logo** can't be added via the
+rating field (only a Kometa‑style poster overlay could, which is out of scope).
+
+The **number does show**, though. By default (`POISKKINO_RATING_IMAGE=kinopoisk`)
+the provider sends a custom `kinopoisk://image.rating` as a **critic** rating;
+Plex stores it verbatim and the web client renders the score next to a generic
+star — honest, and it doesn't masquerade as IMDb/TMDb. (Verified on the web
+client; some mobile/TV apps may render number‑only — if a client shows nothing,
+switch `POISKKINO_RATING_IMAGE` to `imdb`/`themoviedb` to ride a guaranteed icon
+at the cost of a mislabeled source.)
 
 ## Matching
 
@@ -77,7 +83,8 @@ All options are environment variables prefixed `POISKKINO_` (see
 | Variable | Default | Description |
 |----------|---------|-------------|
 | `POISKKINO_API_TOKEN` | — | **Required.** Token from [@poiskkinodev_bot](https://t.me/poiskkinodev_bot). |
-| `POISKKINO_RATING_IMAGE` | `imdb` | Badge the KP score rides under (`imdb`/`themoviedb`/`rottentomatoes_ripe`/`rottentomatoes_upright`). |
+| `POISKKINO_RATING_IMAGE` | `kinopoisk` | How the KP score shows: `kinopoisk` (number + generic star, honest) or ride a branded icon (`imdb`/`themoviedb`/`rottentomatoes_ripe`/`rottentomatoes_upright`). |
+| `POISKKINO_RATING_TYPE` | `critic` | Rating slot (`critic`/`audience`). `critic` is needed for the `kinopoisk` number to render. |
 | `POISKKINO_WRITE_POSTER` | `true` | Contribute the Kinopoisk poster. |
 | `POISKKINO_WRITE_SUMMARY` | `true` | Contribute the Russian description + tagline. |
 | `POISKKINO_WRITE_ART` | `true` | Contribute background art. |
