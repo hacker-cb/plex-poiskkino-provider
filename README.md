@@ -100,6 +100,14 @@ Architecture: a framework‑free **core** (`poiskkino/` client + `matching/` +
 layer (`routes/`, `app.py`) is a thin adapter. See
 [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 
+## Releases
+
+Versioned with [SemVer](https://semver.org/) and released automatically via
+[Release Please](https://github.com/googleapis/release-please) from Conventional
+Commits — merging the bot's release PR cuts a `vX.Y.Z` tag, a GitHub Release, and
+the semver-tagged GHCR image (`latest` tracks the newest release, `edge` tracks
+`master`). See [docs/RELEASING.md](docs/RELEASING.md).
+
 ## License
 
 [MIT](LICENSE) © Pavel Sokolov
