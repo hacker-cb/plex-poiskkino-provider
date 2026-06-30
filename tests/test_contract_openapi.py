@@ -11,6 +11,8 @@ from typing import Any
 
 import pytest
 
+from poiskkino_provider.poiskkino.client import MOVIE_FIELDS
+
 SPEC_PATH = Path(__file__).resolve().parent.parent / "docs" / "openapi.poiskkino.json"
 
 # Top-level Movie fields the client/mapper rely on.
@@ -70,3 +72,25 @@ def test_rating_and_external_id_subfields(property_names: set[str]) -> None:
     # Nested fields we read off rating/externalId/poster.
     for field in ("kp", "imdb", "tmdb", "url", "previewUrl"):
         assert field in property_names, f"spec missing nested field {field!r}"
+
+
+@pytest.fixture(scope="module")
+def movie_select_fields_enum() -> set[str]:
+    spec = json.loads(SPEC_PATH.read_text(encoding="utf-8"))
+    params = spec["paths"]["/v1.4/movie"]["get"]["parameters"]
+    select = next((p for p in params if p["name"] == "selectFields"), None)
+    assert select is not None, "/v1.4/movie has no selectFields parameter in the spec"
+    schema = select["schema"]
+    enum = schema.get("items", schema).get("enum")
+    assert enum, "spec has no selectFields enum for /v1.4/movie"
+    return set(enum)
+
+
+def test_client_select_fields_are_valid(movie_select_fields_enum: set[str]) -> None:
+    """Every field we request via selectFields must be accepted by the API.
+
+    The dotted form (``genres.name``) is a valid *filter* name but NOT a valid
+    selectFields value — passing it makes ``/v1.4/movie`` return HTTP 400.
+    """
+    invalid = set(MOVIE_FIELDS) - movie_select_fields_enum
+    assert not invalid, f"invalid selectFields values (API would 400): {sorted(invalid)}"
