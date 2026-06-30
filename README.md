@@ -123,6 +123,18 @@ Commits — merging the bot's release PR cuts a `vX.Y.Z` tag, a GitHub Release, 
 the semver-tagged GHCR image (`latest` tracks the newest release, `edge` tracks
 `master`). See [docs/RELEASING.md](docs/RELEASING.md).
 
+## References
+
+Plex Custom Metadata Provider API (the contract this project implements):
+
+- [Announcement / overview](https://forums.plex.tv/t/announcement-custom-metadata-providers/934384)
+- [API reference — Metadata Providers](https://developer.plex.tv/pms/#section/API-Info/Metadata-Providers)
+- [Official example provider (TMDB)](https://github.com/plexinc/tmdb-example-provider)
+- [Legacy Plex plugin docs](https://plex-plugin-docs.readthedocs.io/en/latest/overview.html) (background)
+
+Data source: the [PoiskKino API](https://poiskkino.dev), a
+[kinopoisk.dev](https://kinopoisk.dev)-compatible service.
+
 ## License
 
 [MIT](LICENSE) © Pavel Sokolov
