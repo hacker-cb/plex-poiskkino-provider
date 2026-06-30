@@ -8,14 +8,16 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class RatingImage(StrEnum):
-    """Which rating-badge identifier the Kinopoisk score is published under.
+    """Which rating-badge image the Kinopoisk score is published under.
 
-    Plex has no Kinopoisk icon. ``kinopoisk`` sends a custom image scheme that
-    Plex stores verbatim and the web client renders as the number next to a
-    generic star (honest — it doesn't pretend to be IMDb/TMDb). The other values
-    ride a built-in branded badge: the official icon shows, but it mislabels the
-    source. Built-in icons are a closed set, so a real Kinopoisk logo isn't
-    possible via the rating field (only a poster overlay could do that).
+    Plex has no Kinopoisk icon, and its clients only render a rating whose image
+    is one of the built-in branded badges (IMDb, TMDb, Rotten Tomatoes). The
+    custom ``kinopoisk`` scheme is stored verbatim but renders as *nothing* on
+    every client tested (web, iOS) — it's data-only. To actually show the number
+    you must ride a recognized badge: it mislabels the source, but the score is
+    visible. ``themoviedb`` is the default — Russian titles almost never carry a
+    real TMDb critic score, so the Kinopoisk value rarely collides with one. A
+    genuine Kinopoisk logo is only possible via a poster overlay (out of scope).
     """
 
     kinopoisk = "kinopoisk"
@@ -36,9 +38,10 @@ RATING_IMAGE_IDENTIFIERS: dict[RatingImage, str] = {
 
 
 class RatingType(StrEnum):
-    """Plex rating slot. ``critic`` is required for the custom-image number to
-    render (the web client's generic numeric fallback keys off the critic value)
-    and is also the slot Plex Movie most often leaves free."""
+    """Plex rating slot. ``critic`` (the default) is a separate slot from the
+    ``audience`` rating, so the Kinopoisk badge sits beside the film's existing
+    audience score instead of competing with it — Plex fills ``audienceRating``
+    from its own IMDb cloud augmentation, which a provider can't override."""
 
     critic = "critic"
     audience = "audience"
@@ -74,7 +77,7 @@ class Settings(BaseSettings):
     write_summary: bool = True
     write_art: bool = True
     write_genres: bool = False
-    rating_image: RatingImage = RatingImage.kinopoisk
+    rating_image: RatingImage = RatingImage.themoviedb
     rating_type: RatingType = RatingType.critic
 
     # --- Matching ---

@@ -66,11 +66,25 @@ fallback is common because Kinopoisk often lacks external ids):
 
 `plex/mapping.py` converts a PoiskKino entry into a Plex `Metadata` object,
 honouring the `POISKKINO_WRITE_*` flags. The Kinopoisk score is emitted as a
-single `audience` rating. Plex's rating-badge identifiers are a fixed set
-(`imdb`, `themoviedb`, `rottentomatoes`) — there is **no Kinopoisk icon and
-custom ones are not supported** — so the score is shown under the icon chosen by
-`POISKKINO_RATING_IMAGE`. This is a Plex platform limitation, documented in the
-README.
+single entry in the `Rating` array, in the slot (`POISKKINO_RATING_TYPE`) and
+under the image (`POISKKINO_RATING_IMAGE`) chosen by config.
+
+Two Plex platform limitations shape this (both verified live on web + iOS):
+
+- **No Kinopoisk icon, and custom images don't render.** Plex clients only draw
+  a rating whose image is a built-in branded badge (`imdb`, `themoviedb`,
+  `rottentomatoes`). A custom `kinopoisk://image.rating` is stored but renders as
+  *nothing*, so the default rides `themoviedb` (Russian titles rarely have a real
+  TMDb critic score to collide with). A genuine Kinopoisk logo would need a
+  poster overlay (out of scope).
+- **Plex stores only the `Rating` array**, ignoring scalar `rating`/
+  `audienceRating` fields a provider sends; it fills the prominent
+  `audienceRating` slot from its own IMDb cloud augmentation, which a provider
+  can't override. That's why the score goes in the `critic` slot by default.
+
+Operational note: changing `POISKKINO_RATING_IMAGE` for an **already-matched**
+item needs a *re-match* (Fix Match) — a plain "Refresh Metadata" does not
+overwrite an existing rating. New items pick up the rating on first match.
 
 ## Why a Custom Metadata Provider (not a legacy `.bundle` agent)
 
