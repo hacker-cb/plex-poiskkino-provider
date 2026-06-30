@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.2](https://github.com/hacker-cb/plex-poiskkino-provider/compare/v0.3.1...v0.3.2) (2026-06-30)
+
+
+### Documentation
+
+* add root CLAUDE.md and a README references section ([#14](https://github.com/hacker-cb/plex-poiskkino-provider/issues/14)) ([b801156](https://github.com/hacker-cb/plex-poiskkino-provider/commit/b80115692ba3bbe281be3c68cea3bfd956322542))
+
 ## [0.3.1](https://github.com/hacker-cb/plex-poiskkino-provider/compare/v0.3.0...v0.3.1) (2026-06-30)
 
 
