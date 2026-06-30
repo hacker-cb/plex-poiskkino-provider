@@ -78,7 +78,8 @@ def test_rating_and_external_id_subfields(property_names: set[str]) -> None:
 def movie_select_fields_enum() -> set[str]:
     spec = json.loads(SPEC_PATH.read_text(encoding="utf-8"))
     params = spec["paths"]["/v1.4/movie"]["get"]["parameters"]
-    select = next(p for p in params if p["name"] == "selectFields")
+    select = next((p for p in params if p["name"] == "selectFields"), None)
+    assert select is not None, "/v1.4/movie has no selectFields parameter in the spec"
     schema = select["schema"]
     enum = schema.get("items", schema).get("enum")
     assert enum, "spec has no selectFields enum for /v1.4/movie"
