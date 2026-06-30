@@ -26,11 +26,17 @@ def _movie_release_date(movie: Movie) -> str | None:
 
 
 def build_ratings(movie: Movie, settings: Settings) -> list[Rating] | None:
-    """The Kinopoisk score as a single audience rating (or ``None`` if missing)."""
+    """The Kinopoisk score as a single rating (or ``None`` if missing)."""
     kp = movie.kp_rating
     if kp is None:
         return None
-    return [Rating(image=settings.rating_image_identifier, type="audience", value=round(kp, 3))]
+    return [
+        Rating(
+            image=settings.rating_image_identifier,
+            type=settings.rating_type.value,
+            value=round(kp, 3),
+        )
+    ]
 
 
 def build_guids(movie: Movie) -> list[GuidRef] | None:

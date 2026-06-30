@@ -8,25 +8,40 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class RatingImage(StrEnum):
-    """Which built-in Plex rating badge the Kinopoisk score rides under.
+    """Which rating-badge identifier the Kinopoisk score is published under.
 
-    Plex has no Kinopoisk icon and the badge set is fixed, so the score must be
-    displayed under one of these existing identifiers.
+    Plex has no Kinopoisk icon. ``kinopoisk`` sends a custom image scheme that
+    Plex stores verbatim and the web client renders as the number next to a
+    generic star (honest — it doesn't pretend to be IMDb/TMDb). The other values
+    ride a built-in branded badge: the official icon shows, but it mislabels the
+    source. Built-in icons are a closed set, so a real Kinopoisk logo isn't
+    possible via the rating field (only a poster overlay could do that).
     """
 
+    kinopoisk = "kinopoisk"
     imdb = "imdb"
     themoviedb = "themoviedb"
     rottentomatoes_ripe = "rottentomatoes_ripe"
     rottentomatoes_upright = "rottentomatoes_upright"
 
 
-# Maps the friendly enum to the exact identifier strings Plex understands.
+# Maps the friendly enum to the exact identifier strings Plex stores.
 RATING_IMAGE_IDENTIFIERS: dict[RatingImage, str] = {
+    RatingImage.kinopoisk: "kinopoisk://image.rating",
     RatingImage.imdb: "imdb://image.rating",
     RatingImage.themoviedb: "themoviedb://image.rating",
     RatingImage.rottentomatoes_ripe: "rottentomatoes://image.rating.ripe",
     RatingImage.rottentomatoes_upright: "rottentomatoes://image.rating.upright",
 }
+
+
+class RatingType(StrEnum):
+    """Plex rating slot. ``critic`` is required for the custom-image number to
+    render (the web client's generic numeric fallback keys off the critic value)
+    and is also the slot Plex Movie most often leaves free."""
+
+    critic = "critic"
+    audience = "audience"
 
 
 class Settings(BaseSettings):
@@ -59,7 +74,8 @@ class Settings(BaseSettings):
     write_summary: bool = True
     write_art: bool = True
     write_genres: bool = False
-    rating_image: RatingImage = RatingImage.imdb
+    rating_image: RatingImage = RatingImage.kinopoisk
+    rating_type: RatingType = RatingType.critic
 
     # --- Matching ---
     match_threshold: float = 0.6
