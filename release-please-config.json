@@ -4,6 +4,7 @@
     ".": {
       "release-type": "python",
       "package-name": "poiskkino-provider",
+      "include-component-in-tag": false,
       "changelog-path": "CHANGELOG.md",
       "extra-files": [
         "src/poiskkino_provider/__init__.py"
