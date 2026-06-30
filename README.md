@@ -25,9 +25,10 @@ the Kinopoisk data.
 
 ### ⚠️ Honest limitation: there is no "Kinopoisk" rating *icon*
 
-Plex's branded rating icons are a closed set (`imdb`, `themoviedb`,
-`rottentomatoes`, `thetvdb`) — a true Kinopoisk **logo** can't be added via the
-rating field (only a Kometa‑style poster overlay could, which is out of scope).
+Plex's branded rating icons are a closed set (this provider exposes `imdb`,
+`themoviedb`, `rottentomatoes_ripe`, `rottentomatoes_upright`) — a true Kinopoisk
+**logo** can't be added via the rating field (only a Kometa‑style poster overlay
+could, which is out of scope).
 
 Worse, Plex clients **only render a rating that rides one of those branded
 badges**. A custom `kinopoisk://image.rating` is stored but shows up as
