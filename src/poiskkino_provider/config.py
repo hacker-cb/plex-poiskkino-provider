@@ -62,7 +62,6 @@ class Settings(BaseSettings):
     rating_image: RatingImage = RatingImage.imdb
 
     # --- Matching ---
-    language: str = "ru"
     match_threshold: float = 0.6
     search_limit: int = 10
 

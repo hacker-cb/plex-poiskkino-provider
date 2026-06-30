@@ -51,7 +51,7 @@ class ProviderService:
     ) -> None:
         self._settings = settings
         self._matcher = matcher
-        self._client = matcher._client
+        self._client = matcher.client
         self._cache: TTLCache[str, object] = cache or TTLCache(
             ttl_seconds=settings.cache_ttl_seconds,
             max_entries=settings.cache_max_entries,

@@ -81,6 +81,11 @@ class Matcher:
         self._threshold = threshold
         self._search_limit = search_limit
 
+    @property
+    def client(self) -> PoiskKinoClient:
+        """The underlying PoiskKino client, shared with the orchestration service."""
+        return self._client
+
     async def match(self, hints: MatchHints) -> Movie | None:
         """Return the single best match, or ``None`` if nothing is confident enough."""
         results = await self.match_candidates(hints, limit=1)
