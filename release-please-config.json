@@ -1,0 +1,15 @@
+{
+  "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
+  "bump-minor-pre-major": true,
+  "bump-patch-for-minor-pre-major": false,
+  "packages": {
+    ".": {
+      "release-type": "python",
+      "package-name": "poiskkino-provider",
+      "changelog-path": "CHANGELOG.md",
+      "extra-files": [
+        "src/poiskkino_provider/__init__.py"
+      ]
+    }
+  }
+}
