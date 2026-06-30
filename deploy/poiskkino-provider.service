@@ -1,0 +1,37 @@
+# systemd unit for a native (non-Docker) install.
+#
+# Setup:
+#   sudo useradd --system --no-create-home poiskkino
+#   sudo python3 -m venv /opt/poiskkino-provider/.venv
+#   sudo /opt/poiskkino-provider/.venv/bin/pip install \
+#        git+https://github.com/hacker-cb/plex-poiskkino-provider
+#   sudo install -m 600 -o poiskkino -g poiskkino /dev/stdin /etc/poiskkino-provider.env <<'EOF'
+#   POISKKINO_API_TOKEN=your-token-here
+#   POISKKINO_HOST=127.0.0.1
+#   POISKKINO_PORT=8000
+#   EOF
+#   sudo cp deploy/poiskkino-provider.service /etc/systemd/system/
+#   sudo systemctl daemon-reload && sudo systemctl enable --now poiskkino-provider
+[Unit]
+Description=PoiskKino Plex Metadata Provider
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=poiskkino
+Group=poiskkino
+# Bind localhost only — the provider API is unauthenticated (env file may override).
+Environment=POISKKINO_HOST=127.0.0.1
+EnvironmentFile=/etc/poiskkino-provider.env
+ExecStart=/opt/poiskkino-provider/.venv/bin/poiskkino-provider
+Restart=on-failure
+RestartSec=5
+# Hardening
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+
+[Install]
+WantedBy=multi-user.target
