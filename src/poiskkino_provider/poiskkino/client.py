@@ -33,8 +33,8 @@ MOVIE_FIELDS: tuple[str, ...] = (
     "ratingMpaa",
     "movieLength",
     "seriesLength",
-    "genres.name",
-    "countries.name",
+    "genres",
+    "countries",
     "names",
     "premiere",
 )
